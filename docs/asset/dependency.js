@@ -1,0 +1,2 @@
+Storage.prototype.setObject=function(t,e){this.setItem(t,JSON.stringify(e))},Storage.prototype.getObject=function(t){return JSON.parse(this.getItem(t))}
+function type(a,b){if(b)return null===a?"[object Null]":Object.prototype.toString.call(a);if(null==a)return(a+"").toLowerCase();var c=Object.prototype.toString.call(a).slice(8,-1).toLowerCase();return"generatorfunction"===c?"function":c.match(/^(array|bigint|date|error|function|generator|regexp|symbol)$/)?c:"object"==typeof a||"function"==typeof a?"object":typeof a}

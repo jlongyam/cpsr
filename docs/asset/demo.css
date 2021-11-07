@@ -1,0 +1,28 @@
+h3 { color: green; }
+h4 { color: purple; }
+pre {
+  overflow: auto;
+  }
+.box {
+  border: 2px solid orange;
+  padding: 5px;
+  margin-bottom: 1em;
+  }
+  .box > pre {
+    border: 2px solid gray;
+    padding: 5px;
+    margin: 0;
+    }
+  .box > textarea {
+    margin: 0;
+    pading: 5px;
+    height: 100px;
+    }
+  .box > iframe {
+    border: 2px solid gray;
+    width: 100%;
+    height: 100px;
+    }
+#div_storage {
+  margin-bottom: 100px;
+  }

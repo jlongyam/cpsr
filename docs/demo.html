@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>Demo-CPSR</title>
+  <link href="./asset/style.css" rel="stylesheet" />
+  <link href="./asset/demo.css" rel="stylesheet" />
+  <script src="./asset/dependency.js"></script>
+  <script src="./asset/main.js"></script>
+</head>
+<body>
+  <div class="breadcrumb"><a href="./index.html">Back</a></div>
+  <h2>Demo-CPSR</h2>
+
+  <h3>capture</h3>
+  <div class="box" id="div_capture">
+    <input type="file" id="file1">
+    <hr />
+    <h4>report</h4>
+    <pre id="report1"></pre>
+    <h4>value</h4>
+    <textarea id="ta_value" hidden></textarea>
+    <pre id="report1_value"></pre>
+  </div>
+
+  <h3>preview</h3>
+  <div class="box" id="div_preview">
+    <iframe id="iframe_preview" hidden></iframe>
+  </div>
+
+  <h3>save</h3>
+  <div class="box" id="div_save">
+    <button id="btn_save" hidden>save</button>
+    <pre id="report1_save"></pre>
+  </div>
+
+  <h3>retrieve</h3>
+  <div class="box" id="div_retrive">
+    <button id="btn_load">load</button>
+    <h4>value</h4>
+    <textarea id="ta_load" hidden></textarea>
+    <h4>preview</h4>
+    <iframe id="iframe_load" hidden></iframe>
+    <pre id="report1_load"></pre>    
+  </div>
+  <hr />
+  <div id="div_storage">
+    <button id="btn_clear">clear storage</button>
+    <button id="btn_storage" hidden>show storage</button>
+    <pre id="pre_storage"></pre>
+  </div>
+  
+  <script src="./asset/demo.js"></script>
+</body>
+</html>
