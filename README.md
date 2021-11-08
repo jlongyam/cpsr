@@ -15,10 +15,6 @@ CPSR meaning
 - **S**tore
 - **R**etrive
 
-## TLDR;
-
-Still on **Progress** ...
-
 ## Demo
 
 [jlongyam.github.io/cpsr/](https://jlongyam.github.io/cpsr/)

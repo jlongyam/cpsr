@@ -15,6 +15,35 @@ class CPSR {
       if( files ) callback( files )
       })
     }
+  _formatIframe( category, value, mime = '' ) {
+    let result = ''
+    switch( category ) {
+      case 'text': result = `
+        <pre>${value}</pre>
+      `; break
+      case 'image': result = `
+        <div style="display:flex;justify-content:center">
+          <img src="${value}" type="${mime}" />
+        </div>'
+      `; break
+      case 'audio': result = `
+        <div style="display:flex;justify-content:center;align-items:center;height:100%">
+          <audio controls>
+            <source src="${value}" type="${mime}">
+          </audio>
+        </div>'
+      `; break
+      case 'video': result = `
+        <video controls style="width:100%;height100%">
+          <source src="${value}" type="${mime}">
+        </video>
+      `; break
+      case 'pdf': result = `
+        <embed width="100%" height="100%" src="${value}" type="${mime}" />
+      `; break
+      }
+    return result
+    }
   file_info = { name: '', type: '', size: '', lastModified: '' }
   file_mime = { primary: '', secondary: '' }
   file_value = ''
@@ -45,17 +74,52 @@ class CPSR {
       this.file_mime.primary = a_files[0]
       this.file_mime.secondary = a_files[1]
       if( this.file_mime.primary === 'text' ) {
-        reader.readAsText( files )
         reader.addEventListener( 'loadend', ( event )=> {
           this.file_value = event.target.result
           callback()
           })
+        reader.readAsText( files )
+        }
+      if( this.file_mime.primary === 'image' ) {
+        reader.addEventListener( 'loadend', ( event )=> {
+          this.file_value = event.target.result
+          callback()
+          })
+        if( this.file_mime.secondary === 'svg+xml') reader.readAsText( files )
+        else reader.readAsDataURL( files )
+        }
+      if( ( this.file_mime.primary === 'audio' ) || ( this.file_mime.primary === 'video') ) {
+        reader.addEventListener( 'loadend', ( event )=> {
+          this.file_value = event.target.result
+          callback()
+          })
+        reader.readAsDataURL( files )
+        }
+      if( this.file_mime.primary === 'application' ) {
+        if( this.file_mime.secondary === 'pdf') {
+          reader.addEventListener( 'loadend', ( event )=> {
+            this.file_value = event.target.result
+            callback()
+            })
+          reader.readAsDataURL( files )
+          }
         }
       })
     }
   capturePreview( iframe ) {
-    if( this.file_mime.secondary === 'html' ) this.file_content = this.file_value
-    else this.file_content = '<pre>' + this.file_value + '</pre>'
+    if( this.file_mime.primary === 'text' ) {
+      if( this.file_mime.secondary === 'html' ) this.file_content = this.file_value
+      else this.file_content = this._formatIframe( 'text', this.file_value )
+      }
+    if( this.file_mime.primary === 'image' ) {
+      if( this.file_mime.secondary === 'svg+xml') this.file_content = this.file_value
+      else this.file_content = this._formatIframe( 'image', this.file_value, this.file_info.type )
+      }
+    if( this.file_mime.primary === 'audio' ) this.file_content = this._formatIframe( 'audio', this.file_value, this.file_info.type )
+    if( this.file_mime.primary === 'video' ) this.file_content = this._formatIframe( 'video', this.file_value, this.file_info.type )
+    if( this.file_mime.primary === 'application' ) {
+      if( this.file_mime.secondary === 'pdf') this.file_content = this._formatIframe( 'pdf', this.file_value, this.file_info.type )
+      }
     let content = iframe.contentDocument || iframe.contentWindow.document
     content.open()
     content.write( this.file_content );
@@ -106,7 +170,16 @@ class CPSR {
     let value = ''
     if( mime_primary === 'text' ) {
       if( mime_secondary === 'html' ) value = data.value
-      else value = '<pre>' + data.value + '</pre>'
+      else value = this._formatIframe( 'text', data.value )
+      }
+    if( mime_primary === 'image' ) {
+      if( mime_secondary === 'svg+xml') value = data.value
+      else value = this._formatIframe( 'image', data.value, data.type )
+      }
+    if( this.file_mime.primary === 'audio' ) value = this._formatIframe( 'audio', data.value, data.type )
+    if( this.file_mime.primary === 'video' ) value = this._formatIframe( 'video', data.value, data.type )
+    if( this.file_mime.primary === 'application' ) {
+      if( mime_secondary === 'pdf' ) value = this._formatIframe( 'pdf', data.value, data.type )
       }
     content.open()
     content.write( value );

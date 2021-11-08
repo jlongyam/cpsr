@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>Test</title>
+  <script src="../dist/cpsr.min.js"></script>
+</head>
+<body>
+  <h1>Test</h1>
+  <pre id="output"></pre>
+  <script>
+    var cpsr = new CPSR
+    let obj = sessionStorage.getObject('cpsr')
+    output.textContent = `${ cpsr.name } = ${ JSON.stringify( obj,0,2 ) }`
+  </script>
+</body>
+</html>

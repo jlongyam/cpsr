@@ -84,6 +84,9 @@
         retrieve_meta.removeAttribute( 'hidden' )
         retrieve_meta.textContent = 'type: ' + content.type + '\nsize: ' + content.size
         retrieve_label_recent.setAttribute( 'hidden', '' )
+        // preview
+        preview.removeAttribute('hidden')
+        cpsr.retrievePreview( preview_result, content )
       }
     })
     function colect_option() {

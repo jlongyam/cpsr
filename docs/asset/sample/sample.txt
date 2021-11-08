@@ -1,5 +1,5 @@
+https://filesamples.com/
 Tips
-====
 * Convert jpg to webp format with cwebp:
   cwebp -q 90 input-file.jpg -o output-file.webp
 * Convert mp4 video to webm format with ffmpeg:
