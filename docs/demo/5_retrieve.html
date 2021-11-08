@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>retrieve</title>
+  <link href="../asset/style.css" rel="stylesheet" />
+   <link href="../asset/demo.css" rel="stylesheet" />
+  <script src="../asset/dependency.js"></script>
+  <script src="../asset/main.js"></script>
+</head>
+<body>
+  <h2>retrieve</h2>
+  <p>if no data, store data first</p>
+  <input type="file" id="file" />
+  <div class="box" id="save" hidden>
+    <button id="save_button">save</button>
+    <pre id="save_info" hidden style="margin-top: 5px"></pre>
+  </div>
+  <div class="box" id="retrieve">
+    <div>
+      <h3>load recent</h3>
+      <button id="retrieve_button_recent">load recent</button>
+      <label id="retrieve_label_recent" hidden></label>
+    </div>
+    <div>
+      <h3>load specific</h3>
+      <select id="retrieve_option"><option selected disabled>select path</option></select>
+      <button id="retrieve_button">load</button>
+    </div>    
+    <div id="retrieve_result">
+      <h4>result</h4>
+      <textarea id="retrieve_textarea"></textarea>
+      <pre id="retrieve_meta" hidden></pre>
+    </div>
+  </div>
+  <script>
+    var cpsr = new CPSR
+    cpsr.capture( file, ()=> {
+      save.removeAttribute( 'hidden' )
+    })
+    save_button.addEventListener( 'click', ()=> {
+      cpsr.save()
+      if( !cpsr.storage_exists ) {
+        save_info.removeAttribute( 'hidden' )
+        save_info.textContent = '"' + cpsr.file_info.name + '" saved'
+        colect_option()
+      }
+      else {
+        save_info.removeAttribute( 'hidden' )
+        save_info.textContent = '"' + cpsr.file_info.name + '" is exists'
+      }
+    })
+    retrieve_button_recent.addEventListener( 'click', ()=> {
+      let content = cpsr.retrieve()
+      if( type(content) != 'undefined' ) {
+        retrieve_textarea.value = content.value
+        retrieve_meta.removeAttribute( 'hidden' )
+        retrieve_meta.textContent = 'type: ' + content.type + '\nsize: ' + content.size
+        retrieve_label_recent.removeAttribute( 'hidden' )
+        let recent = cpsr.storage_recent
+        retrieve_label_recent.textContent = '"' + recent + '"'
+      }
+    })
+    retrieve_button.addEventListener( 'click', ()=> {
+      if( retrieve_option.value != 'select path' ) {
+        let content = cpsr.retrieve( retrieve_option.value )
+        retrieve_textarea.value = content.value
+        retrieve_meta.removeAttribute( 'hidden' )
+        retrieve_meta.textContent = 'type: ' + content.type + '\nsize: ' + content.size
+        retrieve_label_recent.setAttribute( 'hidden', '' )
+      }
+    })
+    function colect_option() {
+      let arr = cpsr.storage_path
+      retrieve_option.innerHTML = '<option selected disabled>select path</option>'
+      arr.forEach(( val )=> {
+        retrieve_option.innerHTML += '<option>'+val+'</option>'
+      })
+    }
+    colect_option()
+  </script>
+</body>
+</html>

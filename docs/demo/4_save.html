@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>save</title>
+  <link href="../asset/style.css" rel="stylesheet" />
+   <link href="../asset/demo.css" rel="stylesheet" />
+  <script src="../asset/dependency.js"></script>
+  <script src="../asset/main.js"></script>
+</head>
+<body>
+  <h2>save</h2>
+  <input type="file" id="file" />
+  <div class="box" id="result" hidden>
+    <h3>result</h3>
+    <h4>value</h4>
+    <textarea id="result_output"></textarea>
+  </div>
+  <div class="box" id="save" hidden>
+    <button id="save_button">save</button>
+    <div id="info" hidden>
+      <h4>info</h4>
+      <pre id="save_info"></pre>
+    </div>
+  </div>
+  <script>
+    var cpsr = new CPSR
+    cpsr.capture( file, ( value, mime )=> {
+      result.removeAttribute( 'hidden' )
+      result_output.value = value
+      save.removeAttribute( 'hidden' )
+    })
+    save_button.addEventListener( 'click', ()=> {
+      info.removeAttribute( 'hidden' )
+      cpsr.save()
+      save_info.textContent = JSON.stringify( sessionStorage.getObject( 'cpsr'),0,2 )
+    })
+  </script>
+</body>
+</html>

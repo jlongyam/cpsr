@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>install</title>
+  <link href="../asset/style.css" rel="stylesheet" />
+  <script src="../asset/dependency.js"></script>
+  <script src="../asset/main.js"></script>
+</head>
+<body>
+  <h2>install</h2>
+  <pre id="output"></pre>
+  <script>
+    var cpsr = new CPSR
+    output.textContent = `${ cpsr.name }: ${ JSON.stringify( sessionStorage.getObject( 'cpsr' ),0,2 ) }`
+    
+    var instance = new CPSR( 'whatever' )
+    output.textContent += `\n${ instance.name }: ${ JSON.stringify( sessionStorage.getObject( 'whatever' ),0,2 ) }`
+    
+    sessionStorage.clear()
+    output.textContent += `\nsessionStorage.clear()\nsessionStorage.length: ${ sessionStorage.length }`
+  </script>
+</body>
+</html>

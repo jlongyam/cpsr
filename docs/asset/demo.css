@@ -1,28 +1,29 @@
+body {
+  padding-bottom: 50px;
+  } 
 h3 { color: green; }
 h4 { color: purple; }
-pre {
-  overflow: auto;
-  }
 .box {
   border: 2px solid orange;
   padding: 5px;
   margin-bottom: 1em;
   }
-  .box > pre {
+  .box h3, .box h4 { margin: 5px 0; }
+  .box pre {
     border: 2px solid gray;
     padding: 5px;
     margin: 0;
+    overflow: auto;
     }
-  .box > textarea {
+  .box textarea {
     margin: 0;
     pading: 5px;
-    height: 100px;
+    height: 200px;
     }
-  .box > iframe {
+  .box iframe {
     border: 2px solid gray;
     width: 100%;
-    height: 100px;
+    height: 200px;
     }
-#div_storage {
-  margin-bottom: 100px;
-  }
+  .box button { margin: 0; }
+  .box input[type="text"], .box select { display: inline-block; }
