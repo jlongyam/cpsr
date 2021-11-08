@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>API</title>
+  <link href="./asset/style.css" rel="stylesheet" />
+  <link href="./asset/api.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h2>API</h2>
+  </header>
+  <main>
+    <section>
+      <h3>Initial</h3>
+      <h4><code>CPSR( NAME = 'cpsr' )</code></h4>
+      <pre><code>let instance = new CPSR( 'app' )</code></pre>
+      <p>It's create sessionStorage object with name <code>app</code> which contents is:</p>
+      <pre>{ session: TIME, recent: '', data: <b>[]</b> }</pre>
+      <p>
+        It can be access by using <code>sessionStorage.getObject( NAME )</code><br />
+        or settings manually using <code>sessionStorage.setObject( NAME, CONTENT )</code>
+      </p>
+      <p>See demo <a href="./demo/1_install.html">install</a></p>
+    </section>
+    <section>
+      <h3>Properties</h3>
+      <p>These properties appear during <mark>capture</mark> session:</p>
+      <ul>
+        <li>
+          <h4><code>file_info.</code> OBJECT</h4>
+          <ul>
+            <li><code>name</code> STRING, a <b>file name</b></li>
+            <li><code>type</code> STRING, like <b>text/html</b></li>
+            <li><code>size</code> STRING, extended size conversion ( Bytes, MB, GB, etc )</li>
+            <li><code>lastModified</code> NUMBER</li>
+          </ul>
+        </li>
+        <li>
+          <h4><code>file_mime.</code> OBJECT</h4>
+          <p>contains splited MIME, like <b>text/plain</b></p>
+          <ul>
+            <li><code>primary</code> STRING, like <b>text</b></li>
+            <li><code>secondary</code> STRING, like <b>plain</b></li>
+          </ul>
+        </li>
+        <li>
+          <h4><code>file_value</code> STRING</h4>
+          <p>This STRING is native/original <b>value</b></p>
+        </li>
+        <li>
+          <h4><code>file_content</code> STRING</h4>
+          <p>These STRING is HTML string, not plain text</p>
+        </li>
+      </ul>
+      <p>These properties appear during <mark>retrieve</mark> session:</p>
+      <ul>
+        <li><h4><code>storage_exists</code> default is <code>false</code></h4></li>
+        <li>
+          <h4><code>storage_path</code> ARRAY</h4>
+          <p>It's contains only path ( file ) <b>name</b>, not include it's content</p>
+        </li>
+        <li>
+          <h4><code>storage_recent</code> STRING</h4>
+          <p>Contains single <b>path</b> ( file name )</p>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h3>Methods</h3>
+      <ul>
+        <li>
+          <h4><code>capture( FILE, CALLBACK )</code></h4>
+          <p>Where FILE is element input type file</p>
+          <p>Afterward CALLBACK can be trigger</p>
+          <p>See, demo <a href="./demo/2_capture.html">capture</a>.</p>
+        </li>
+        <li>
+          <h4><code>capturePreview( IFRAME )</code></h4>
+          <p>All source include image, audio, video will render via IFRAME element</p>
+          <p>See, demo <a href="./demo/3_capture_preview.html">capture preview</a></p>
+        </li>
+        <li>
+          <h4><code>save()</code></h4>
+          <p>Extend data to CPSR storage, ignore if exists. see demo <a href="./demo/4_save.html">save</a>.<br /></p>
+        </li>
+        <li>
+          <h4><code>retrieve( PATH )</code></h4>
+          <p>
+            Return <b>Object</b> from sessionStorage <b>cpsr[DATA][n].content</b>.<br />
+            the object children are:
+          </p>
+          <ul>
+            <li>Obj.<code>value</code></li>
+            <li>Obj.<code>type</code></li>
+            <li>Obj.<code>size</code></li>
+          </ul>
+          <p>Then main target is Obj.<b>value</b>. see demo <a href="./demo/5_retrieve.html">retrieve</a></p>
+        </li>
+        <li>
+          <h4><code>retrievePreview( IFRAME, DATA )</code></h4>
+          <p>Use this method inside <b>retrieve</b>. IFRAME content will generate from retrive object result.</p>
+          <p>the DATA is must <b>object</b>, that is <b>retrieve</b> return value</p>
+          <p>See demo <a href="./demo/6_retrieve_preview.html">retrieve preview</a>.</p>
+        </li>
+      </ul>
+    </section>  
+  </main>
+  <footer>
+     <p><a href="./index.html">Back</a></p>
+  </footer>
+</body>
+</html>

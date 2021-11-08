@@ -11,20 +11,27 @@
   <script src="../asset/main.js"></script>
 </head>
 <body>
-  <h2>save</h2>
-  <input type="file" id="file" />
-  <div class="box" id="result" hidden>
-    <h3>result</h3>
-    <h4>value</h4>
-    <textarea id="result_output"></textarea>
-  </div>
-  <div class="box" id="save" hidden>
-    <button id="save_button">save</button>
-    <div id="info" hidden>
-      <h4>info</h4>
-      <pre id="save_info"></pre>
+  <header>
+    <h2>save</h2>
+  </header>
+  <main>
+    <input type="file" id="file" />
+    <div class="box" id="result" hidden>
+      <h3>result</h3>
+      <h4>value</h4>
+      <textarea id="result_output"></textarea>
     </div>
-  </div>
+    <div class="box" id="save" hidden>
+      <button id="save_button">save</button>
+      <div id="info" hidden>
+        <h4>info</h4>
+        <pre id="save_info"></pre>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p><a href="./index.html">Back</a></p>
+  </footer>
   <script>
     var cpsr = new CPSR
     cpsr.capture( file, ( value, mime )=> {

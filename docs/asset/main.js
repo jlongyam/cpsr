@@ -48,7 +48,7 @@ class CPSR {
         reader.readAsText( files )
         reader.addEventListener( 'loadend', ( event )=> {
           this.file_value = event.target.result
-          callback( event.target.result, this.file_mime, files )
+          callback()
           })
         }
       })
@@ -99,5 +99,17 @@ class CPSR {
         }
       return value
       }
+    }
+  retrievePreview( iframe, data ) {
+    const mime = data.type.split('/'), mime_primary = mime[0], mime_secondary = mime[1]
+    let content = iframe.contentDocument || iframe.contentWindow.document
+    let value = ''
+    if( mime_primary === 'text' ) {
+      if( mime_secondary === 'html' ) value = data.value
+      else value = '<pre>' + data.value + '</pre>'
+      }
+    content.open()
+    content.write( value );
+    content.close()
     }
   }

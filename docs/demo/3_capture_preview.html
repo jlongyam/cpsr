@@ -11,27 +11,34 @@
   <script src="../asset/main.js"></script>
 </head>
 <body>
+  <header>
+    <input type="file" id="file" />
+  </header>
   <h2>capture preview</h2>
-  <input type="file" id="file" />
-  <div class="box" id="result" hidden>
-    <h3>result</h3>
-    <h4>info</h4>
-    <pre id="result_info"></pre>
-    <h4>value</h4>
-    <textarea id="result_output"></textarea>
-    <h4>mime</h4>
-    <pre id="result_mime"></pre>
-  </div>
-  <div class="box" id="preview" hidden>
-    <h3>preview</h3>
-    <iframe id="preview_result"></iframe>
-  </div>
+  <main>
+    <div class="box" id="result" hidden>
+      <h3>result</h3>
+      <h4>info</h4>
+      <pre id="result_info"></pre>
+      <h4>value</h4>
+      <textarea id="result_output"></textarea>
+      <h4>mime</h4>
+      <pre id="result_mime"></pre>
+    </div>
+    <div class="box" id="preview" hidden>
+      <h3>preview</h3>
+      <iframe id="preview_result"></iframe>
+    </div>
+  </main>
+  <footer>
+    <p><a href="./index.html">Back</a></p>
+  </footer>
   <script>
     var cpsr = new CPSR
-    cpsr.capture( file, ( value, mime, files )=> {
+    cpsr.capture( file, ()=> {
       result.removeAttribute( 'hidden' )
       result_info.textContent = JSON.stringify( cpsr.file_info,0,2 )
-      result_output.value = value
+      result_output.value = cpsr.file_value
       result_mime.textContent = JSON.stringify( cpsr.file_mime,0,2 )
       // preview
       preview.removeAttribute( 'hidden' )

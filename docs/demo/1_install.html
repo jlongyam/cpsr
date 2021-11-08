@@ -10,15 +10,20 @@
   <script src="../asset/main.js"></script>
 </head>
 <body>
-  <h2>install</h2>
-  <pre id="output"></pre>
+  <header>
+    <h2>install</h2>
+  </header>
+  <main>
+    <pre id="output"></pre>
+  </main>
+  <footer>
+    <p><a href="./index.html">Back</a></p>
+  </footer>
   <script>
     var cpsr = new CPSR
     output.textContent = `${ cpsr.name }: ${ JSON.stringify( sessionStorage.getObject( 'cpsr' ),0,2 ) }`
-    
     var instance = new CPSR( 'whatever' )
     output.textContent += `\n${ instance.name }: ${ JSON.stringify( sessionStorage.getObject( 'whatever' ),0,2 ) }`
-    
     sessionStorage.clear()
     output.textContent += `\nsessionStorage.clear()\nsessionStorage.length: ${ sessionStorage.length }`
   </script>

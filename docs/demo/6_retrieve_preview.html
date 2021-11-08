@@ -4,15 +4,15 @@
   <meta charset="utf-8" />
   <meta http-equiv="content-type" content="text/html" />
   <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <title>retrieve</title>
+  <title>retrieve preview</title>
   <link href="../asset/style.css" rel="stylesheet" />
-   <link href="../asset/demo.css" rel="stylesheet" />
+  <link href="../asset/demo.css" rel="stylesheet" />
   <script src="../asset/dependency.js"></script>
   <script src="../asset/main.js"></script>
 </head>
 <body>
   <header>
-    <h2>retrieve</h2>
+    <h2>retrieve preview</h2>
   </header>
   <main>
     <p>if no data, store data first</p>
@@ -33,10 +33,14 @@
         <button id="retrieve_button">load</button>
       </div>    
       <div id="retrieve_result">
-        <h4>result</h4>
+        <h4>value</h4>
         <textarea id="retrieve_textarea"></textarea>
         <pre id="retrieve_meta" hidden></pre>
       </div>
+    </div>
+    <div class="box" id="preview" hidden>
+      <h3>preview</h3>
+      <iframe id="preview_result"></iframe>
     </div>
   </main>
   <footer>
@@ -68,6 +72,9 @@
         retrieve_label_recent.removeAttribute( 'hidden' )
         let recent = cpsr.storage_recent
         retrieve_label_recent.textContent = '"' + recent + '"'
+        // preview
+        preview.removeAttribute('hidden')
+        cpsr.retrievePreview( preview_result, content )
       }
     })
     retrieve_button.addEventListener( 'click', ()=> {
